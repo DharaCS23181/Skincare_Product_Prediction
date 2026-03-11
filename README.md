@@ -1,237 +1,180 @@
-# Skincare Product Recommendation System (Machine Learning + Knowledge-Based)
+# Skincare Product Recommendation using Machine Learning
 
 ## Project Overview
 
-This project builds a **skincare product recommendation system** that suggests suitable skincare products based on a user's skin profile. The system combines **knowledge-based logic** (ingredient–condition mapping) with **machine learning** to recommend appropriate skincare products.
+This project builds a **Machine Learning based skincare product recommendation system**.
+The system recommends suitable skincare products based on the user's **skin type, skin condition, and desired product type**.
 
-The system analyzes a user's **age, skin type, hydration level, oil level, sensitivity, and skin conditions** to determine the most suitable products. The final output provides **top product recommendations** ranked by product rating.
+The model predicts the **best skincare product** and provides additional information such as:
 
-This project demonstrates how **data preprocessing, feature engineering, recommendation logic, and machine learning models** can be integrated into a practical AI application.
-
----
-
-## Objectives
-
-* Build a skincare recommendation system based on user skin characteristics.
-* Integrate ingredient knowledge with product data.
-* Generate a dataset for machine learning training.
-* Train multiple machine learning models to predict recommended skincare products.
-* Compare model performance.
+* Brand
+* Notable Effects
+* Product Image
 
 ---
 
-## Datasets Used
+# Dataset Description
 
-### 1. Skin Profile Dataset
+The dataset contains skincare products and their properties.
 
-Contains user skin characteristics.
+## Columns in Dataset
 
-Columns:
-
-* Age
-* Gender
-* Hydration_Level
-* Oil_Level
-* Sensitivity
-* Skin_Type
-
-This dataset simulates user skin profiles.
-
----
-
-### 2. Ingredient Knowledge Dataset
-
-Contains skincare ingredients and the skin conditions they help treat.
-
-Columns:
-
-* name (ingredient name)
-* who_is_it_good_for (skin conditions the ingredient helps with)
-* who_should_avoid (optional safety information)
-
-This dataset is used to **map skin conditions to useful ingredients**.
+| Column          | Description                                                                    |
+| --------------- | ------------------------------------------------------------------------------ |
+| skintype        | Skin type suitable for the product (Oily, Dry, Normal, Combination, Sensitive) |
+| skin_condition  | Skin concerns like acne, pigmentation, wrinkles, redness, etc.                 |
+| product_type    | Type of product (Face Wash, Toner, Serum, Moisturizer, Sunscreen)              |
+| product_name    | Name of the skincare product                                                   |
+| brand           | Brand of the product                                                           |
+| notable_effects | Key benefits such as brightening, acne-free, moisturizing                      |
+| picture_src     | URL of the product image                                                       |
 
 ---
 
-### 3. Product Dataset
+# Machine Learning Pipeline
 
-Contains skincare products and their properties.
+## 1 Data Preprocessing
 
-Columns:
+Before training the models:
 
-* Label (product type such as cleanser, moisturizer, etc.)
-* brand
-* name (product name)
-* price
-* rank (product rating)
-* ingredients
-* combination
-* dry
-* normal
-* oily
-* sensitive
+1. Load dataset using **Pandas**
+2. Encode categorical variables using **Label Encoding**
+3. Define **features (X)** and **target (y)**
+4. Split the dataset into **training and testing sets**
 
-The binary columns indicate whether a product is suitable for each skin type.
+Features used for training:
 
----
-
-## Data Processing Steps
-
-### 1. Skin Condition Generation
-
-A new column **skin_condition** is generated based on user features such as:
-
-* Oil level
-* Hydration level
-* Age
-* Sensitivity
-
-Example conditions:
-
-* acne
-* pigmentation
-* wrinkles
-* fine lines
-* dry and dehydrated skin
-* enlarged pores
-* redness
-
-This step simulates realistic skincare concerns.
-
----
-
-### 2. Ingredient Mapping
-
-The ingredient dataset is used to map:
-
-```
-skin_condition → suitable ingredients
-```
-
-Example:
-
-```
-acne → salicylic acid
-wrinkles → retinol
-dry skin → hyaluronic acid
-```
-
----
-
-### 3. Product Matching
-
-Products are filtered based on:
-
-1. Skin type compatibility
-2. Presence of relevant ingredients
-3. Product ranking (rating)
-
-The system returns the **Top 3 recommended products** sorted by rating.
-
----
-
-## Final Dataset
-
-After processing, the final dataset contains:
-
-* Age
-* Gender
-* Hydration_Level
-* Oil_Level
-* Sensitivity
-* Skin_Type
+* skintype
 * skin_condition
-* recommended_product
-
-This dataset is used to train machine learning models.
-
----
-
-## Machine Learning Models Implemented
-
-The following six machine learning models are used to predict the recommended product:
-
-1. Logistic Regression
-2. K-Nearest Neighbors (KNN)
-3. Decision Tree
-4. Random Forest
-5. Support Vector Machine (SVM)
-6. Naive Bayes
-
-Each model learns the relationship between **user skin features and recommended products**.
-
----
-
-## Model Features (Input Variables)
-
-The models use the following features:
-
-* Age
-* Gender
-* Hydration_Level
-* Oil_Level
-* Sensitivity
-* Skin_Type
-* skin_condition
+* product_type
 
 Target variable:
 
-```
-recommended_product
-```
+* product_name
 
 ---
 
-## Workflow
+# Machine Learning Models Implemented
 
-1. Load datasets
-2. Clean and preprocess data
-3. Generate skin conditions
-4. Map ingredients to conditions
-5. Match products using ingredient filtering
-6. Generate recommended products
-7. Create final ML dataset
-8. Train machine learning models
-9. Evaluate model accuracy
+## 1 Logistic Regression
+
+Steps:
+
+* Encode categorical variables
+* Split dataset into train and test sets
+* Train Logistic Regression model
+* Predict product name
+* Evaluate accuracy
 
 ---
 
-## Technologies Used
+## 2 K-Nearest Neighbors (KNN)
+
+Steps:
+
+* Choose value of **k**
+* Train KNN model
+* Predict recommended product
+* Evaluate model accuracy
+
+---
+
+## 3 Naive Bayes
+
+Steps:
+
+* Train Naive Bayes classifier
+* Predict product name
+* Evaluate model performance
+
+---
+
+## 4 Decision Tree
+
+Steps:
+
+* Train Decision Tree classifier
+* Predict recommended product
+* Evaluate model accuracy
+* Optional: visualize decision tree
+
+---
+
+## 5 Random Forest
+
+Steps:
+
+* Train Random Forest classifier
+* Tune number of trees (n_estimators)
+* Predict products
+* Evaluate model performance
+
+---
+
+## 6 Support Vector Machine (SVM)
+
+Steps:
+
+* Train SVM classifier
+* Use kernel functions (linear or rbf)
+* Predict recommended product
+* Evaluate accuracy
+
+---
+
+# Model Evaluation
+
+The models are evaluated using **accuracy score** on the test dataset.
+
+Evaluation metric used:
+
+* Accuracy Score
+
+Future improvements can include:
+
+* Precision
+* Recall
+* F1 Score
+
+---
+
+# Example Recommendation
+
+User Input:
+
+Skin Type: Oily
+Skin Condition: Acne
+Product Type: Face Wash
+
+Model Output:
+
+Product Name: Example Face Wash
+Brand: Example Brand
+Notable Effects: Acne control, oil balancing
+Product Image: URL of the product image
+
+---
+
+# Technologies Used
 
 * Python
 * Pandas
 * NumPy
 * Scikit-learn
-* Jupyter Notebook / Google Colab
+* Machine Learning Algorithms
 
 ---
 
-## Output
+# Future Improvements
 
-For each user profile, the system recommends skincare products suitable for their skin type and condition.
-
-Example output:
-
-| Skin Type | Skin Condition | Recommended Product            |
-| --------- | -------------- | ------------------------------ |
-| Oily      | Acne           | Salicylic Acid Treatment Serum |
-| Dry       | Wrinkles       | Retinol Anti-Aging Cream       |
-| Normal    | Pigmentation   | Vitamin C Brightening Serum    |
+* Add more skincare products
+* Improve recommendation accuracy
+* Implement top-3 product recommendations
+* Build a web interface using **Streamlit**
+* Deploy the model online
 
 ---
 
-## Future Improvements
+# Conclusion
 
-Possible enhancements include:
-
-* Incorporating dermatologist-approved ingredient rules
-* Adding price-based filtering
-* Personalized ranking using user feedback
-* Deep learning recommendation systems
-* Real-time web or mobile application integration
-
----
-
-## Conclusion
-
-This project demonstrates how **data science and machine learning can be applied to personalized skincare recommendations**. By combining domain knowledge (ingredients and skin conditions) with machine learning models, the system can provide intelligent product suggestions tailored to individual skin profiles.
+This project demonstrates how **machine learning algorithms can be applied to personalized skincare recommendations** by analyzing user skin characteristics and recommending suitable skincare products.
