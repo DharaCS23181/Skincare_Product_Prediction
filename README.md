@@ -56,17 +56,7 @@ Target variable:
 
 # Machine Learning Models Implemented
 
-## 1 Logistic Regression
 
-Steps:
-
-* Encode categorical variables
-* Split dataset into train and test sets
-* Train Logistic Regression model
-* Predict product name
-* Evaluate accuracy
-
----
 
 ## 2 K-Nearest Neighbors (KNN)
 
